@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  camel-microservice:
+    container_name: camel-microservice
+    build:
+      context: .
+      dockerfile: ./.docker/Dockerfile
+    ports:
+      - "8090:8090"
+    volumes:
+      - tmpVolume:/tmp
+    environment:
+      CAMEL_KEYSTORE_PASSWORD: ${CAMEL_KEYSTORE_PASSWORD}
+      ENV_PROFILE: dev
+      SERVER_PORT: 8090
+    healthcheck:
+      test: ["CMD-SHELL", "curl --silent --fail http://127.0.0.1:8090/actuator/health || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+    networks:
+      - camel_microservice_internal_network
+networks:
+  camel_microservice_internal_network:
+volumes:
+  tmpVolume:

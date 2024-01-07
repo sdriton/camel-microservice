@@ -1,0 +1,57 @@
+
+server:
+    host: 0.0.0.0
+    port: 8090
+
+camel:
+  servlet:
+    mapping:
+      context-path: /api/v1/*   
+  # To enable global SSL in undertow
+  component:
+    http:
+      use-global-ssl-context-parameters: true
+ 
+# Conditional route loading
+com:
+  driton:
+    camel:
+      RestIntegrationRoute:
+        enabled: true
+      FtpTRansferRoute:
+        enabled: false 
+      IntegrationRoute:
+        enabled: true 
+      PollEnrichRoute:
+        enabled: true 
+      RestCallAndTransformRoute:
+        enabled: true 
+      SocketClientRoute:
+        enabled: false
+
+app:
+  employee-file-directory: /tmp
+  
+#Logging properties
+logging:
+  # pattern:
+  #   console: "%-5p [%d{ISO8601}] [Thread: %t] [%X] %-55c  %m%n"
+  level:
+    org.apache.camel: INFO
+
+# # metrics section
+# metrics: 0 */1 * * * *
+
+# #
+# # Actuator metrics endpoints
+# # http://localhost:8090/actuator
+# #
+# management:
+#   endpoints:
+#     web:
+#       exposure:
+#         include:
+#           - info
+#           - health
+#           - prometheus
+#           - jolokia

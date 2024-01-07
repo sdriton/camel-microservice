@@ -1,0 +1,29 @@
+# Build Image
+# Build two images so we can run them locally using different ports
+
+docker build -f .docker/Dockerfile -t driton/camel-route-8090 . --build-arg SERVER_PORT=8090
+docker build -f .docker/Dockerfile -t driton/camel-route-8091 . --build-arg SERVER_PORT=8091 
+
+
+# Create a bridge network
+docker network create -d bridge camel_microservice_internal_network
+
+
+# Run two docker containers to test route clustering, otherwise run only one container.
+#
+# Run the first container on port 8090
+docker run --env CAMEL_KEYSTORE_PASSWORD=Camel123! \
+            -p 127.0.0.1:8090:8090/tcp \
+            --name driton-camel-route-8090 \
+            -v tempVolume:/tmp \
+            --network=camel_microservice_internal_network \ 
+            --rm -it driton/camel-route-8090:latest
+
+# Run the second container on port 8091
+
+docker run --env CAMEL_KEYSTORE_PASSWORD=Camel123! \
+            -p 127.0.0.1:8091:8091/tcp \
+            --name driton-camel-route-8091 \
+            -v tempVolume:/tmp \
+            --network=camel_microservice_internal_network \ 
+            --rm -it driton/camel-route-8091:latest

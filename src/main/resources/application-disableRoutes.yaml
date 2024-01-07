@@ -1,0 +1,121 @@
+
+server:
+    host: 0.0.0.0
+    port: 8090
+
+camel:
+  servlet:
+    mapping:
+      context-path: /api/v1/* 
+  # Clustering
+  # The instances of the same route can be clustered together in a active/passive mode
+  # where only one instance at a time executes the business logic.
+  cluster:
+    file:
+      enabled: true
+      id: ${random.uuid}
+      root: ${java.io.tmpdir}
+
+      # SSL Context is already configured in SSLContextParamsConfiguration.
+  # To enable global SSL Parameters in undertow
+  # component:
+  #   undertow:
+  #     use-global-ssl-context-parameters: true
+  # ssl:
+  #   config: 
+  #     key-managers:
+  #       key-password: ${CAMEL_KEYSTORE_PASSWORD}
+  #       key-store:
+  #         resource: "keystore/camel-keystore.jks"
+  #         password: ${CAMEL_KEYSTORE_PASSWORD}
+  #         type: "jks"
+  #     trust-managers:
+  #       key-store:
+  #         resource: "keystore/camel-keystore.jks"
+  #         password: ${CAMEL_KEYSTORE_PASSWORD}
+  #         type: "jks"
+  # enable backlog tracing
+  # it will read the payload and make a copy as a trace that are stored in the backlog tracer. 
+  # Then monitoring tooling is able to view these traced events.
+  # springboot:
+  #   backlog-tracing: true
+ 
+# Conditional route loading
+com:
+  driton:
+    camel:
+      RestIntegrationRoute:
+        enabled: false
+      FtpTRansferRoute:
+        enabled: false 
+      IntegrationRoute:
+        enabled: false 
+      PollEnrichRoute:
+        enabled: false 
+      RestCallAndTransformRoute:
+        enabled: false 
+      SocketClientRoute:
+        enabled: false
+##
+# Application specific configuration
+##
+app:
+  employee-file-directory: /tmp
+  security:
+    truststore:
+      file: keystore/camel-keystore.jks
+      password: ${CAMEL_KEYSTORE_PASSWORD}
+
+
+# rest:
+#   get:
+#     file: rest:GET:/api/v1/file
+    
+#Logging properties
+logging:
+  pattern:
+    # console: "%-5p [%d{ISO8601}] [Thread: %t] [%X] %-55c  %m%n"
+    console: "%-5p [%d{ISO8601}] %-45c  %m%n"
+  level:
+    org:
+      apache:
+        camel:
+          http: TRACE
+        commons: 
+          httpclient: TRACE
+        spingboot:
+          tracing: TRACE
+
+# metrics section
+metrics: 0 */1 * * * *
+
+#
+# Actuator metrics endpoints
+# http://localhost:8090/actuator
+#
+# Howtio console
+# http://localhost:8090/actuator/hawtio
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - info
+          - health
+          - prometheus
+          # - hawtio
+          # - jolokia
+      # base-path: /
+      # path-mapping:
+      #   hawtio: hawtio/console
+
+# #
+# # Hawtio configuration
+# #
+# hawtio:
+#   authenticationEnabled: false
+#   offline: true
+# # needed for howtio
+spring:
+  jmx:
+    enabled: false
