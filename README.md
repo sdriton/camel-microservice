@@ -7,7 +7,7 @@ The sample node applications are required to run TCP Socket routes.
 
 1. Clone the project:
 
-    `$ git clone <project_location>`
+    `$ git clone https://github.com/sdriton/camel-microservice.git`
 
 2. Install the dependencies:
 
