@@ -11,7 +11,7 @@ camel:
     mapping:
       context-path: /api/v1/* 
   # Clustering
-  # The instances of the same route can be clustered together in a active/passive mode
+  # The instances of the same route can be clustered together in an active/passive mode
   # where only one instance at a time executes the business logic.
   cluster:
     file:
