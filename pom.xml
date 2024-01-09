@@ -28,6 +28,25 @@
 		<springboot-starter.version>3.2.1</springboot-starter.version>
 	</properties>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${springboot-starter.version} </version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.camel.springboot</groupId>
+				<artifactId>camel-spring-boot-bom</artifactId>
+				<version>${camel.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
 		<!-- Spring Boot -->
 
@@ -54,7 +73,7 @@
 			<artifactId>spring-boot-starter-jetty</artifactId>
 			<version>${springboot-starter.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
 			<artifactId>camel-bindy-starter</artifactId>
@@ -155,7 +174,7 @@
 			<groupId>org.apache.camel.springboot</groupId>
 			<artifactId>camel-undertow-starter</artifactId>
 			<version>${camel.version}</version>
-		  </dependency>
+		</dependency>
 
 		<!-- Monitoring Hawtio dependencies -->
 
@@ -192,6 +211,14 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.yaml/snakeyaml -->
+		<dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+			<version>2.2</version>
+			<scope>test</scope>
+		</dependency>
+		
 		<!-- <dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-test-spring</artifactId>
@@ -267,7 +294,7 @@
 				<version>${springboot-starter.version}</version>
 				<configuration>
 					<addResources>true</addResources>
-				  </configuration>
+				</configuration>
 				<!-- <executions>
 				  <execution>
 					<goals>
@@ -275,7 +302,7 @@
 					</goals>
 				  </execution>
 				</executions> -->
-			  </plugin>
+			</plugin>
 		</plugins>
 	</build>
 

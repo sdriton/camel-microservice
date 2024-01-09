@@ -10,6 +10,8 @@ camel:
   servlet:
     mapping:
       context-path: /api/v1/* 
+  springboot:
+    name: intg-service
   # Clustering
   # The instances of the same route can be clustered together in an active/passive mode
   # where only one instance at a time executes the business logic.
