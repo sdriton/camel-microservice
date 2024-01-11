@@ -80,13 +80,6 @@
 			<version>${camel.version}</version>
 		</dependency>
 
-		<!-- <dependency>
-			<groupId>org.apache.camel.springboot</groupId>
-			<artifactId>camel-csv-starter</artifactId>
-			<version>${camel.version}</version>
-		 </dependency> -->
-
-
 		<!-- Micrometer prometheus monitoring dependency -->
 		<dependency>
 			<groupId>io.micrometer</groupId>
@@ -216,29 +209,7 @@
 			<groupId>org.yaml</groupId>
 			<artifactId>snakeyaml</artifactId>
 			<version>2.2</version>
-			<scope>test</scope>
 		</dependency>
-		
-		<!-- <dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-test-spring</artifactId>
-			<version>${camel.version}</version>
-			<scope>test</scope>
-		</dependency> -->
-
-		<!-- <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-test-spring</artifactId>
-			<version></version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-test-autoconfigure</artifactId>
-            <scope>test</scope>
-        </dependency> -->
-
-
 	</dependencies>
 
 	<build>
@@ -295,13 +266,6 @@
 				<configuration>
 					<addResources>true</addResources>
 				</configuration>
-				<!-- <executions>
-				  <execution>
-					<goals>
-					  <goal>repackage</goal>
-					</goals>
-				  </execution>
-				</executions> -->
 			</plugin>
 		</plugins>
 	</build>

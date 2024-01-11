@@ -16,8 +16,12 @@ The sample node applications are required to run TCP Socket routes.
 3. Add this environment variable in your terminal shell 
     
     `export CAMEL_KEYSTORE_PASSWORD=Camel123!`
+
+4. Copy sample CSV file to /tmp directory (or the preferred directory)
+
+    `$ cp ./src/main/resources/static/employees-basic.csv /tmp`
     
-4. Execute:
+5. Execute:
 
     `$ mvn clean compile exec:java`
 
