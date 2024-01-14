@@ -4,13 +4,22 @@ server:
     port: 8090
 
 camel:
+  # camel.main.exchange-factory = pooled
+  main:
+    exchange-factory: pooled
   servlet:
     mapping:
-      context-path: /api/v1/*   
-  # To enable global SSL in undertow
-  component:
-    http:
-      use-global-ssl-context-parameters: true
+      context-path: /api/v1/* 
+  springboot:
+    name: intg-service
+  # Clustering
+  # The instances of the same route can be clustered together in an active/passive mode
+  # where only one instance at a time executes the business logic.
+  cluster:
+    file:
+      enabled: true
+      id: ${random.uuid}
+      root: ${java.io.tmpdir}
  
 # Conditional route loading
 com:
@@ -28,24 +37,50 @@ com:
         enabled: true 
       SocketClientRoute:
         enabled: false
-
+##
+# Application specific configuration
+##
 app:
   employee-file-directory: /tmp
-  
+  security:
+    truststore:
+      file: keystore/camel-keystore.jks
+      password: ${CAMEL_KEYSTORE_PASSWORD}
+
+
+# rest:
+#   get:
+#     file: rest:GET:/api/v1/file
+    
 #Logging properties
 logging:
-  # pattern:
-  #   console: "%-5p [%d{ISO8601}] [Thread: %t] [%X] %-55c  %m%n"
+  pattern:
+    # console: "%-5p [%d{ISO8601}] [Thread: %t] [%X] %-55c  %m%n"
+    console: "%-5p [%d{ISO8601}] %-45c  %m%n"
   level:
-    org.apache.camel: INFO
+    # root: DEBUG enables detailed logging. Use only for debug because it's very verbose.
+    root: ERROR
+    org:
+      apache:
+        camel:
+          http: ERROR
+        commons: 
+          httpclient: ERROR
+        spingboot:
+          tracing: ERROR
+    com:
+      driton:
+        camel: DEBUG
 
-# # metrics section
+# metrics section
 # metrics: 0 */1 * * * *
 
-# #
-# # Actuator metrics endpoints
-# # http://localhost:8090/actuator
-# #
+#
+# Actuator metrics endpoints
+# http://localhost:8090/actuator
+#
+# Howtio console
+# http://localhost:8090/actuator/hawtio
 # management:
 #   endpoints:
 #     web:
@@ -54,4 +89,19 @@ logging:
 #           - info
 #           - health
 #           - prometheus
-#           - jolokia
+          # - hawtio
+          # - jolokia
+      # base-path: /
+      # path-mapping:
+      #   hawtio: hawtio/console
+
+# #
+# # Hawtio configuration
+# #
+# hawtio:
+#   authenticationEnabled: false
+#   offline: true
+# # needed for howtio
+spring:
+  jmx:
+    enabled: false
