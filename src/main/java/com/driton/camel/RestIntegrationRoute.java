@@ -47,6 +47,9 @@ public class RestIntegrationRoute extends RouteBuilder {
 
 		// call this endpoint as follows:
 		// http://localhost:8090/api/v1/file?fileName=employees-basic.csv
+		//
+		// Actuator metrics
+		// http://localhost:8090/actuator
 		rest().produces("application/json")
 				.get("/file").routeId("get-employees-rest-endpoint").produces("application/json")
 				.description("Get employees data")

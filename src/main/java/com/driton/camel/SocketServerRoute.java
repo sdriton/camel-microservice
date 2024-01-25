@@ -25,5 +25,4 @@ public class SocketServerRoute extends RouteBuilder{
         from("netty:tcp://localhost:3004?sync=true&allowDefaultCodec=false&encoders=#stringEncoder&decoders=#stringDecoder")
         .log("Received on port 3004 ${body}");
     }
-    
 }
