@@ -60,6 +60,8 @@ com:
       RestCallAndTransformRoute:
         enabled: true 
       SocketClientRoute:
+        enabled: true
+      SocketServerRoute:
         enabled: false
 ##
 # Application specific configuration
@@ -83,7 +85,7 @@ logging:
     console: "%-5p [%d{ISO8601}] %-45c  %m%n"
   level:
     # root: DEBUG enables detailed logging. Use only for debug because it's very verbose.
-    root: ERROR
+    root: INFO
     org:
       apache:
         camel:
@@ -94,7 +96,7 @@ logging:
           tracing: ERROR
     com:
       driton:
-        camel: DEBUG
+        camel: TRACE
 
 # metrics section
 metrics: 0 */1 * * * *
