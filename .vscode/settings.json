@@ -1,7 +1,4 @@
 {
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "/Users/usalidr/Library/Application Support/Code/User/globalStorage/redhat.vscode-camelk/java-dependencies/*.jar"
-    ],
-    "java.compile.nullAnalysis.mode": "automatic"
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

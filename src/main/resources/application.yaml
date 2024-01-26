@@ -62,7 +62,7 @@ com:
       SocketClientRoute:
         enabled: true
       SocketServerRoute:
-        enabled: false
+        enabled: true
 ##
 # Application specific configuration
 ##
