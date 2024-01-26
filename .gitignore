@@ -30,7 +30,7 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-# .vscode/settings.json
+.vscode/settings.json
 .camel-jbang/
 .mvn/
 
