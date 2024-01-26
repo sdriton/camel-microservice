@@ -41,6 +41,7 @@ RUN cp -r /app/static/* /tmp && \
 VOLUME /tmp
 EXPOSE ${SERVER_PORT}
 EXPOSE 3000
+EXPOSE 3004
 
 # run the app
 # CMD java -Xms1024m -Xmx2048m -Dserver.port=${SERVER_PORT} -Dspring.profiles.active=${ENV_PROFILE} -jar app.jar
