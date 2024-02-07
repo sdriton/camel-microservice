@@ -44,8 +44,8 @@ public class SocketClientRoute extends RouteBuilder {
                 .bean(socketMsgBean)
                 // forward (multicast) the message to many receivers in parallel
                 .multicast().parallelProcessing()
-                .to("netty:tcp://localhost:3001?sync=false&allowDefaultCodec=false&encoders=#stringEncoder&decoders=#stringDecoder")
-                .to("netty:tcp://localhost:3002?sync=false&allowDefaultCodec=false&encoders=#stringEncoder&decoders=#stringDecoder")
+                .to("netty:tcp://localhost:3001?sync=true&allowDefaultCodec=false&encoders=#stringEncoder&decoders=#stringDecoder")
+                .to("netty:tcp://localhost:3002?sync=true&allowDefaultCodec=false&encoders=#stringEncoder&decoders=#stringDecoder")
                 .end();
     }
 }
