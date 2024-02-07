@@ -71,6 +71,11 @@ public class RestIntegrationRoute extends RouteBuilder {
 
 		from("direct:get-file-data").routeId("get-file-data")
 				.bean(FileService.class, "processFile(${exchange})")
+				// Instead of using a bean,
+				// pollEnrich can also be used to read the contents
+				// of a source into the exchange.
+				// .pollEnrich().simple("file:///tmp?fileName=${header.fileName}&noop=true&idempotent=false")
+				.log("${body}")
 				.unmarshal().bindy(BindyType.Csv, Employee.class)
 				.process(exchange -> {
 					// Bindy returns an array list of Employee objects.
