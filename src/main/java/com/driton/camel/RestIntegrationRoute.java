@@ -119,7 +119,7 @@ class FileService {
 		if (!file.exists()) {
 			Message m = exchange.getMessage();
 			m.setHeader(Exchange.HTTP_RESPONSE_CODE, 404);
-			m.setBody("File not found: " + fileName);
+			m.setBody("File not found: " + file.getAbsolutePath());
 			// Stop processing the message and return the response.
 			exchange.setRouteStop(true);
 			return;
