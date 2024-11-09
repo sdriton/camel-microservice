@@ -22,6 +22,9 @@ public class SSLContextParamsConfiguration {
         ksp.setPassword(trustStorePassword);
         ksp.setType("JKS");
 
+        // We only need the trust store to call a SSL endpoint,
+        // but camel seems to need the keymanager parameters and
+        // not the trust manager parameters.
         KeyManagersParameters kmp = new KeyManagersParameters();
         kmp.setKeyStore(ksp);
         kmp.setKeyPassword(trustStorePassword);
@@ -29,9 +32,14 @@ public class SSLContextParamsConfiguration {
         SSLContextServerParameters scsp = new SSLContextServerParameters();
         scsp.setClientAuthentication("NONE");
 
+        // trust manager
+        // TrustManagersParameters trustManagerParams = new TrustManagersParameters();
+        // trustManagerParams.setKeyStore(ksp);
+
         SSLContextParameters scp = new SSLContextParameters();
         scp.setServerParameters(scsp);
         scp.setKeyManagers(kmp);
+        // scp.setTrustManagers(trustManagerParams);
 
         return scp;
     }

@@ -17,7 +17,7 @@ public class RestCallAndTransformRoute extends RouteBuilder {
     public void configure() throws Exception {
         RoutePolicy policy = ClusteredRoutePolicy.forNamespace("rest-call-namespace");
 
-        from("timer:callHttpService?fixedRate=true&period=6000&repeatCount=2")
+        from("timer:callHttpService?fixedRate=true&period=6000&repeatCount=25")
                 // The instances of the same route can be clustered together in a active/passive
                 // mode where only one instance at a time executes the business logic.
                 //
@@ -38,8 +38,8 @@ public class RestCallAndTransformRoute extends RouteBuilder {
                 .marshal().json(JsonLibrary.Jackson, true)
                 .log("After marshalling:\n ${body}")
                 .convertBodyTo(String.class)
-                .to("mock:funnel");
-        // to("netty:tcp://localhost:3001?sync=false&allowDefaultCodec=false&encoders=#stringEncoder&decoders=#stringDecoder");
+                .to("mock:funnel")
+                .to("netty:tcp://localhost:3001?sync=true&allowDefaultCodec=false&encoders=#stringEncoder&decoders=#stringDecoder");
     }
 }
 

@@ -71,6 +71,10 @@ Other  tools such as OpenSSL or Java keytool can be used to create the certifica
     ```
 3. Configure in SSLContextParamsConfiguration class the SSL Context.
 
+4. Optional. Import the certificate to the cacerts
+
+keytool -importcert -file jetty.crt -alias jetty -keystore $JAVA_HOME/jre/lib/security/cacerts
+
 ## Dockerize the application
 
 ### Using the <strong>docker-compose.yaml</strong> file in the root directory
