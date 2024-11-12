@@ -123,7 +123,7 @@ class RestIntegrationRouteSpringTests {
                 headers);
 
         assertNotNull(res);
-        assertEquals("File not found: employees-wrong-file.csv", res);
+        assertEquals("File not found: /tmp/employees-wrong-file.csv", res);
         mockFinishEndpoint.assertIsSatisfied();
         this.headers.clear();
     }

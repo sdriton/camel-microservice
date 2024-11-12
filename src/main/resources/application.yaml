@@ -69,9 +69,12 @@ com:
 app:
   employee-file-directory: /tmp
   security:
-    truststore:
+    keystore:
       file: keystore/camel-keystore.jks
       password: ${CAMEL_KEYSTORE_PASSWORD}
+    truststore:
+      file: keystore/camel-cacerts.jks
+      password: ${CAMEL_TRUSTSTORE_PASSWORD}
 
 
 # rest:

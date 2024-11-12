@@ -55,17 +55,19 @@ com:
       RestCallAndTransformRoute:
         enabled: true 
       SocketClientRoute:
-        enabled: false
+        enabled: true
 ##
 # Application specific configuration
 ##
 app:
   employee-file-directory: /tmp
   security:
-    truststore:
+    keystore:
       file: keystore/camel-keystore.jks
       password: ${CAMEL_KEYSTORE_PASSWORD}
-
+    truststore:
+      file: keystore/camel-cacerts.jks
+      password: ${CAMEL_TRUSTSTORE_PASSWORD}
 
 # rest:
 #   get:
