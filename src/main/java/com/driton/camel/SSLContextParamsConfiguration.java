@@ -30,11 +30,12 @@ public class SSLContextParamsConfiguration {
         ksp.setPassword(keyStorePassword);
         ksp.setType("JKS");
 
-
         KeyManagersParameters kmp = new KeyManagersParameters();
         kmp.setKeyStore(ksp);
         kmp.setKeyPassword(keyStorePassword);
 
+        // Create SSLContextServer Parameters to speciify if the server will
+        // require also client authentication.
         SSLContextServerParameters scsp = new SSLContextServerParameters();
         scsp.setClientAuthentication("NONE");
 
@@ -51,6 +52,9 @@ public class SSLContextParamsConfiguration {
         TrustManagersParameters trustManagerParams = new TrustManagersParameters();
         trustManagerParams.setKeyStore(tsp);
 
+        // Set SSLContext Parameters that can be used in Camel Routes
+        // This contains keymanager (used by a SSL server), trustmanager 
+        // (used by a SSL client) and server parameters.
         SSLContextParameters scp = new SSLContextParameters();
         scp.setServerParameters(scsp);
         scp.setKeyManagers(kmp);
